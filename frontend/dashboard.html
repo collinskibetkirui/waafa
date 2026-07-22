@@ -10,9 +10,9 @@
     <div class="container">
         <div class="dashboard">
             <header class="dashboard-header">
-                <h1>🏦 Waafi Loan Agent</h1>
+                <h1><span>Waafi</span> Loan</h1>
                 <div class="user-info">
-                    <span id="userName">Loading...</span>
+                    <span id="userName">👋 Loading...</span>
                     <button id="logoutBtn" class="btn-secondary">Logout</button>
                 </div>
             </header>
@@ -86,7 +86,7 @@
                 <div class="card history-card">
                     <h2>📊 Loan History</h2>
                     <div id="loanHistory">
-                        <p>No loans yet</p>
+                        <p style="color: var(--waafi-gray-400); text-align: center; padding: 20px 0;">No loans yet</p>
                     </div>
                 </div>
             </div>
@@ -94,13 +94,13 @@
     </div>
 
     <script>
-        const API_BASE = 'https://waafa.pxxl.run/api';
+        const API_BASE = '/api';
         let currentUser = null;
 
         // Check if user is logged in
         const userData = localStorage.getItem('waafi_user');
         if (!userData) {
-            window.location.href = 'index.html';
+            window.location.href = '/';
         }
 
         currentUser = JSON.parse(userData);
@@ -150,7 +150,7 @@
                         html += '</div>';
                         historyDiv.innerHTML = html;
                     } else {
-                        historyDiv.innerHTML = '<p style="color: #888;">No active loans</p>';
+                        historyDiv.innerHTML = '<p style="color: var(--waafi-gray-400); text-align: center; padding: 20px 0;">No active loans</p>';
                     }
                 }
             } catch (error) {
@@ -212,7 +212,7 @@
         // Logout
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('waafi_user');
-            window.location.href = 'index.html';
+            window.location.href = '/';
         });
 
         // Load initial data

