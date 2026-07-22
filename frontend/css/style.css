@@ -1,0 +1,822 @@
+/* ============================================
+   WAAFI THEME - Clean & Professional
+   Colors inspired by Waafi App
+   ============================================ */
+
+:root {
+    /* Primary Colors - Waafi Green Theme */
+    --waafi-primary: #00A651;
+    --waafi-primary-dark: #00853F;
+    --waafi-primary-light: #E8F5E9;
+    --waafi-secondary: #1A237E;
+    
+    /* Neutral Colors */
+    --waafi-white: #FFFFFF;
+    --waafi-gray-50: #F8FAFC;
+    --waafi-gray-100: #F1F5F9;
+    --waafi-gray-200: #E2E8F0;
+    --waafi-gray-300: #CBD5E1;
+    --waafi-gray-400: #94A3B8;
+    --waafi-gray-500: #64748B;
+    --waafi-gray-600: #475569;
+    --waafi-gray-700: #334155;
+    --waafi-gray-800: #1E293B;
+    --waafi-gray-900: #0F172A;
+    
+    /* Semantic Colors */
+    --waafi-success: #00A651;
+    --waafi-warning: #F59E0B;
+    --waafi-error: #EF4444;
+    --waafi-info: #3B82F6;
+    
+    /* Shadows */
+    --waafi-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --waafi-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --waafi-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --waafi-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --waafi-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--waafi-gray-100);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* ============================================
+   LOGIN PAGE - Waafi Style
+   ============================================ */
+.login-box {
+    background: var(--waafi-white);
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 460px;
+    margin: 0 auto;
+    box-shadow: var(--waafi-shadow-xl);
+    border: 1px solid var(--waafi-gray-200);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.logo h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--waafi-gray-900);
+    letter-spacing: -0.5px;
+}
+
+.logo h1 span {
+    color: var(--waafi-primary);
+}
+
+.logo p {
+    color: var(--waafi-gray-500);
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* ============================================
+   FORM ELEMENTS - Waafi Style
+   ============================================ */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--waafi-gray-700);
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--waafi-gray-200);
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    background: var(--waafi-white);
+    color: var(--waafi-gray-900);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--waafi-primary);
+    box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.15);
+}
+
+.form-group input::placeholder {
+    color: var(--waafi-gray-400);
+}
+
+.form-group small {
+    display: block;
+    color: var(--waafi-gray-500);
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* ============================================
+   BUTTONS - Waafi Style
+   ============================================ */
+.btn-primary {
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--waafi-primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: var(--waafi-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 166, 81, 0.35);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-secondary {
+    padding: 8px 20px;
+    background: var(--waafi-gray-200);
+    color: var(--waafi-gray-700);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--waafi-gray-300);
+}
+
+/* ============================================
+   MESSAGES
+   ============================================ */
+.error-message {
+    background: #FEF2F2;
+    color: #991B1B;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin: 16px 0;
+    border: 1px solid #FECACA;
+    font-size: 14px;
+}
+
+.success-message {
+    background: #F0FDF4;
+    color: #166534;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin: 16px 0;
+    border: 1px solid #86EFAC;
+    font-size: 14px;
+}
+
+/* ============================================
+   OTP VISUAL - Waafi Style
+   ============================================ */
+#otpVisual {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 16px;
+    background: var(--waafi-gray-50);
+    border-radius: 12px;
+}
+
+.otp-box {
+    width: 52px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    background: var(--waafi-white);
+    border: 2px solid var(--waafi-gray-200);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    font-family: 'Courier New', monospace;
+    color: var(--waafi-gray-900);
+}
+
+.otp-box:not(:empty) {
+    border-color: var(--waafi-primary);
+    background: var(--waafi-primary-light);
+    color: var(--waafi-primary);
+}
+
+#otpInput {
+    font-size: 24px !important;
+    letter-spacing: 16px;
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    padding: 16px !important;
+    height: 64px;
+    border-radius: 12px !important;
+}
+
+/* ============================================
+   PIN VISUAL - Waafi Style
+   ============================================ */
+#pinVisual {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 20px 0;
+    padding: 16px;
+    background: var(--waafi-gray-50);
+    border-radius: 12px;
+}
+
+.pin-box {
+    width: 60px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    background: var(--waafi-white);
+    border: 2px solid var(--waafi-gray-200);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    font-family: 'Courier New', monospace;
+    color: var(--waafi-gray-900);
+}
+
+.pin-box:not(:empty) {
+    border-color: var(--waafi-primary);
+    background: var(--waafi-primary-light);
+    color: var(--waafi-primary);
+}
+
+#pinInput {
+    font-size: 24px !important;
+    letter-spacing: 16px;
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    padding: 16px !important;
+    height: 64px;
+    border-radius: 12px !important;
+}
+
+@media (max-width: 768px) {
+    .pin-box {
+        width: 50px;
+        height: 60px;
+        font-size: 26px;
+    }
+    
+    #pinInput {
+        font-size: 20px !important;
+        letter-spacing: 12px;
+        height: 56px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pin-box {
+        width: 42px;
+        height: 52px;
+        font-size: 22px;
+    }
+    
+    #pinInput {
+        font-size: 18px !important;
+        letter-spacing: 8px;
+        height: 48px;
+    }
+}
+
+/* ============================================
+   LOADING SCREEN - Waafi Style
+   ============================================ */
+#step3, #step5 {
+    animation: fadeIn 0.4s ease;
+    padding: 24px 0;
+}
+
+.loading-spinner {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto;
+    border: 4px solid var(--waafi-gray-200);
+    border-top: 4px solid var(--waafi-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    position: relative;
+}
+
+.loading-spinner::after {
+    content: '💰';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#step3 h3, #step5 h3 {
+    color: var(--waafi-gray-900);
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#step3 p, #step5 p {
+    color: var(--waafi-gray-500);
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.progress-container {
+    width: 100%;
+    background: var(--waafi-gray-200);
+    border-radius: 100px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--waafi-primary), var(--waafi-primary-dark));
+    transition: width 0.5s ease;
+}
+
+#countdownTimer, #pinCountdownTimer {
+    font-weight: 700;
+    color: var(--waafi-primary);
+    font-size: 20px;
+}
+
+/* ============================================
+   FOOTER LINKS
+   ============================================ */
+.footer {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.footer a {
+    color: var(--waafi-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: var(--waafi-primary-dark);
+    text-decoration: underline;
+}
+
+/* ============================================
+   MODAL - Waafi Style
+   ============================================ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--waafi-white);
+    padding: 32px;
+    border-radius: 20px;
+    max-width: 440px;
+    width: 100%;
+    position: relative;
+    box-shadow: var(--waafi-shadow-xl);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--waafi-gray-400);
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+}
+
+.close:hover {
+    color: var(--waafi-gray-900);
+}
+
+.modal-content h2 {
+    color: var(--waafi-gray-900);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+/* ============================================
+   DASHBOARD - Waafi Style
+   ============================================ */
+.dashboard {
+    background: var(--waafi-white);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--waafi-shadow-xl);
+    border: 1px solid var(--waafi-gray-200);
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--waafi-gray-200);
+    margin-bottom: 28px;
+}
+
+.dashboard-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--waafi-gray-900);
+}
+
+.dashboard-header h1 span {
+    color: var(--waafi-primary);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-info #userName {
+    font-weight: 500;
+    color: var(--waafi-gray-700);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: var(--waafi-gray-50);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--waafi-gray-200);
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--waafi-shadow-md);
+}
+
+.card h2 {
+    color: var(--waafi-gray-700);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Profile Card */
+.profile-details p {
+    padding: 8px 0;
+    color: var(--waafi-gray-600);
+    font-size: 14px;
+    border-bottom: 1px solid var(--waafi-gray-200);
+}
+
+.profile-details p:last-child {
+    border-bottom: none;
+}
+
+.profile-details strong {
+    color: var(--waafi-gray-800);
+    font-weight: 600;
+}
+
+/* Limit Card */
+.limit-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.limit-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--waafi-gray-200);
+    font-size: 14px;
+}
+
+.limit-item:last-child {
+    border-bottom: none;
+}
+
+.limit-item .label {
+    color: var(--waafi-gray-500);
+}
+
+.limit-item .value {
+    font-weight: 600;
+    color: var(--waafi-gray-800);
+}
+
+.limit-item.highlight {
+    padding: 12px 0;
+    border-bottom: none;
+}
+
+.limit-item.highlight .label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--waafi-gray-700);
+}
+
+.limit-item.highlight .value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--waafi-primary);
+}
+
+.limit-bar {
+    background: var(--waafi-gray-200);
+    border-radius: 100px;
+    height: 6px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.limit-fill {
+    background: var(--waafi-primary);
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.5s ease;
+}
+
+/* Apply Card */
+.loan-message {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.loan-message.success {
+    background: #F0FDF4;
+    color: #166534;
+    border: 1px solid #86EFAC;
+}
+
+.loan-message.error {
+    background: #FEF2F2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
+}
+
+/* History Card */
+.loan-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.loan-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--waafi-white);
+    border-radius: 10px;
+    border: 1px solid var(--waafi-gray-200);
+    font-size: 14px;
+}
+
+.loan-ref {
+    font-weight: 600;
+    color: var(--waafi-gray-700);
+    font-size: 13px;
+}
+
+.loan-amount {
+    font-weight: 600;
+    color: var(--waafi-gray-800);
+}
+
+.loan-status {
+    padding: 4px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-disbursed {
+    background: #F0FDF4;
+    color: #166534;
+}
+
+.status-repaid {
+    background: #EFF6FF;
+    color: #1E40AF;
+}
+
+.status-pending {
+    background: #FFFBEB;
+    color: #92400E;
+}
+
+.status-defaulted {
+    background: #FEF2F2;
+    color: #991B1B;
+}
+
+/* ============================================
+   RESPONSIVE - Waafi Style
+   ============================================ */
+@media (max-width: 768px) {
+    .login-box {
+        padding: 32px 24px;
+        max-width: 100%;
+        border-radius: 20px;
+    }
+    
+    .dashboard {
+        padding: 20px;
+        border-radius: 20px;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .otp-box {
+        width: 42px;
+        height: 52px;
+        font-size: 22px;
+    }
+    
+    #otpVisual {
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    #otpInput {
+        font-size: 20px !important;
+        letter-spacing: 10px;
+        height: 56px;
+    }
+    
+    .logo h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 24px 16px;
+        border-radius: 16px;
+    }
+    
+    .otp-box {
+        width: 36px;
+        height: 46px;
+        font-size: 18px;
+    }
+    
+    #otpVisual {
+        gap: 6px;
+        padding: 10px;
+    }
+    
+    #otpInput {
+        font-size: 18px !important;
+        letter-spacing: 6px;
+        height: 48px;
+        padding: 12px !important;
+    }
+    
+    .btn-primary {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+    
+    .dashboard-header h1 {
+        font-size: 18px;
+    }
+    
+    .card {
+        padding: 16px;
+    }
+    
+    .limit-item.highlight .value {
+        font-size: 20px;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-center {
+    text-align: center;
+}
+
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+.mt-24 { margin-top: 24px; }
+
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-24 { margin-bottom: 24px; }
+
+/* ============================================
+   WAAFI BRAND COLORS
+   ============================================ */
+.bg-waafi-primary { background: var(--waafi-primary); }
+.bg-waafi-primary-light { background: var(--waafi-primary-light); }
+.text-waafi-primary { color: var(--waafi-primary); }
+.text-waafi-gray { color: var(--waafi-gray-500); }
